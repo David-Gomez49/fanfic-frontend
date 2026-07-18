@@ -87,17 +87,7 @@ export function SiteHeader() {
           </Button>
 
 {user ? (
-            <>
-              <Link
-                href="/profile"
-                className="grid h-8 w-8 place-items-center rounded-full bg-gradient-primary shadow-glow text-primary-foreground text-xs font-semibold"
-                aria-label="Profile"
-                title="Profile"
-              >
-                {user.name[0]?.toUpperCase()}
-              </Link>
-              <UserMenu />
-            </>
+            <UserMenu />
           ) : (
             <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
               <DialogTrigger asChild>
