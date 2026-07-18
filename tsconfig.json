@@ -22,9 +22,15 @@
         "name": "next"
       }
     ],
-    "paths": {
+"paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@features/*": [
+        "./src/features/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
       ]
     }
   },

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Lora, Nunito_Sans } from "next/font/google";
-import { Providers } from "@/components/providers";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Toaster } from "@/components/ui/sonner";
-import { PWARegister } from "@/components/pwa-register";
+import { Providers } from "@/shared/components/layout/providers";
+import { SiteHeader } from "@/shared/components/layout/site-header";
+import { SiteFooter } from "@/shared/components/layout/site-footer";
+import { Toaster } from "@/shared/components/ui/sonner";
+import { PWARegister } from "@/shared/components/common/pwa-register";
 import "./globals.css";
+
+export const dynamic = "force-dynamic";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -20,16 +22,16 @@ const nunito = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Ficshelf — Descubre y recomienda fanfictions",
+  title: "Ficshelf — Discover and recommend fanfictions",
   description:
-    "Catálogo social de fanfictions: agrega, etiqueta, califica y descubre tu próxima lectura favorita.",
+    "Social fanfiction catalog: add, tag, rate, and discover your next favorite read.",
 };
 
 const themeScript = `(function(){try{var t=localStorage.getItem('ficshelf:theme');if(!t){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}document.documentElement.style.colorScheme=t;}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${lora.variable} ${nunito.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${lora.variable} ${nunito.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: `if("serviceWorker"in navigator)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(r){r.unregister()})})` }} />

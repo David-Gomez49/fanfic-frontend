@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
+
+export const dynamic = "force-dynamic";
 
 export default function NotFound() {
   return (
