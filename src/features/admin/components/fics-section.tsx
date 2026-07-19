@@ -130,7 +130,7 @@ export default function FicsSection() {
                 <td className="py-3 pr-4 text-muted-foreground">{f.fandoms.join(", ")}</td>
                 <td className="py-3 pr-4 text-muted-foreground text-xs">{new Date(f.createdAt).toLocaleDateString()}</td>
                 <td className="py-3 pr-4 text-muted-foreground">
-                  <Link href={`/profile/${f.addedBy.id}`} target="_blank" className="hover:text-primary-glow transition">{f.addedBy.name}</Link>
+                  {f.addedBy ? <Link href={`/profile/${f.addedBy.id}`} target="_blank" className="hover:text-primary-glow transition">{f.addedBy.name}</Link> : <span className="text-muted-foreground/50">Deleted user</span>}
                 </td>
                 <td className="py-3 pr-4 flex gap-1">
                   <button onClick={() => openEdit(f)} className="text-muted-foreground hover:text-foreground transition p-1" title="Edit fic" aria-label="Edit fic">

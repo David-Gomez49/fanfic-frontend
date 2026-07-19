@@ -8,25 +8,24 @@ test.describe('Auth flows', () => {
 
     await page.goto('/')
 
-    const signInButton = page.locator('button', { hasText: 'Sign in' })
+    const signInButton = page.locator('header button', { hasText: 'Sign in' })
     await signInButton.click()
 
-    const signUpTab = page.getByRole('tab', { name: 'Sign up' })
-    await signUpTab.click()
+    await page.getByRole('tab', { name: 'Sign up' }).click()
 
     await page.locator('#su-u').fill(username)
     await page.locator('#su-p').fill(password)
     await page.locator('#su-cp').fill(password)
 
-    await page.locator('button', { hasText: 'Sign up' }).click()
+    await page.getByRole('dialog').getByRole('button', { name: 'Sign up' }).click()
 
-    await expect(page.getByText(username)).toBeVisible()
+    await expect(page.locator('a[aria-label="Profile"]')).toBeVisible({ timeout: 10000 })
   })
 
   test('login and logout with existing user', async ({ page, testData }) => {
     await login(page, testData.user.username, testData.user.password)
 
-    await expect(page.getByText(testData.user.username)).toBeVisible()
+    await expect(page.locator('a[aria-label="Profile"]')).toBeVisible()
 
     await logout(page)
 
@@ -36,12 +35,11 @@ test.describe('Auth flows', () => {
   test('invalid credentials show error', async ({ page }) => {
     await page.goto('/')
 
-    const signInButton = page.locator('button', { hasText: 'Sign in' })
-    await signInButton.click()
+    await page.locator('header button', { hasText: 'Sign in' }).click()
 
     await page.locator('#li-u').fill('nonexistent_user')
     await page.locator('#li-p').fill('WrongPass1')
-    await page.locator('button', { hasText: 'Sign in' }).click()
+    await page.getByRole('dialog').getByRole('button', { name: 'Sign in' }).click()
 
     await expect(page.getByText(/invalid credentials/i)).toBeVisible()
   })

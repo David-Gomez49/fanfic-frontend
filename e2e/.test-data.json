@@ -1,0 +1,65 @@
+{
+  "runId": "e2e",
+  "user": {
+    "id": "cmrr9ja810001ugvsjkaimkrp",
+    "username": "e2euser_e2e",
+    "password": "E2eTestPass1!",
+    "email": "e2euser_e2e@test.com"
+  },
+  "admin": {
+    "id": "cmrr9j9ma0000ugvsirk6o1jp",
+    "username": "e2eadmin_e2e",
+    "password": "E2eAdminPass1!",
+    "email": "e2eadmin_e2e@test.com"
+  },
+  "fics": [
+    {
+      "id": "cmrr9jg6s0008ugvszo2ul3w7",
+      "title": "The Lost Artifact",
+      "author": "J.K. Rowling",
+      "status": "complete",
+      "fandom": "Harry Potter",
+      "tag": "Angst"
+    },
+    {
+      "id": "cmrr9jijv000augvstlvvqi37",
+      "title": "Heroes United",
+      "author": "Stan Lee",
+      "status": "in progress",
+      "fandom": "Marvel Cinematic Universe",
+      "tag": "Fluff"
+    },
+    {
+      "id": "cmrr9jk53000cugvsbtv2g1e4",
+      "title": "The Veiled Truth",
+      "author": "Unknown Author",
+      "status": "paused",
+      "fandom": "Harry Potter",
+      "tag": "Alternate Universe (AU)"
+    }
+  ],
+  "fandoms": [
+    {
+      "id": "cmrr9jb290002ugvs3sqvz3jo",
+      "name": "Harry Potter"
+    },
+    {
+      "id": "cmrr9jc0d0003ugvsg38468sq",
+      "name": "Marvel Cinematic Universe"
+    }
+  ],
+  "tags": [
+    {
+      "id": "cmrr9jcpi0004ugvsx9p5l5zy",
+      "name": "Angst"
+    },
+    {
+      "id": "cmrr9jdtw0005ugvs1rquoxok",
+      "name": "Fluff"
+    },
+    {
+      "id": "cmrr9jeuy0006ugvsjeyle8hn",
+      "name": "Alternate Universe (AU)"
+    }
+  ]
+}

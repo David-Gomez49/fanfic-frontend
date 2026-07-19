@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Loader2, Eye, EyeOff, AlertCircle, Check, X } from "lucide-react";
-import { useLogin, useRegister } from "../hooks";
+import { useLogin, useRegister, useAuth } from "../hooks";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
@@ -28,6 +28,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
 
   const loginMutation = useLogin();
   const registerMutation = useRegister();
+  const { setUser } = useAuth();
 
   const PASS_CHECKS = [
     { label: "Minimum 8 characters", test: (p: string) => p.length >= 8 },
@@ -49,7 +50,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     if (!loginUsername || !password) return;
     setLoginError("");
     try {
-      await loginMutation.mutateAsync({ username: loginUsername, password });
+      const { user } = await loginMutation.mutateAsync({ username: loginUsername, password });
+      setUser(user);
       setLoginUsername("");
       setPassword("");
       onSuccess?.();
@@ -62,7 +64,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     if (!signupUser || !signupValid) return;
     setSignupError("");
     try {
-      await registerMutation.mutateAsync({ username: signupUser, password: signupPass });
+      const { user } = await registerMutation.mutateAsync({ username: signupUser, password: signupPass });
+      setUser(user);
       setSignupUser("");
       setSignupPass("");
       setConfirmPass("");
@@ -190,7 +193,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             {signupError}
           </div>
         )}
-        <Button className="w-full bg-gradient-primary" onClick={(e) => { e.preventDefault(); }} disabled={!allPass || !passwordsMatch || registerMutation.isPending}>
+        <Button className="w-full bg-gradient-primary" onClick={handleSignup} disabled={!allPass || !passwordsMatch || registerMutation.isPending}>
           {registerMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Sign up"}
         </Button>
       </TabsContent>

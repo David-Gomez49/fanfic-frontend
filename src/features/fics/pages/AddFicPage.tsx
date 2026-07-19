@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Link2, X, Plus, Loader2 } from "lucide-react";
@@ -165,16 +165,17 @@ export default function AddFicPage() {
         </Field>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Field label="Title" error={errors.title}>
-            <Input value={form.title} onChange={(e) => update("title", e.target.value)} className={`bg-surface ${errors.title ? "border-destructive" : "border-border"}`} />
+          <Field label="Title" id="title" error={errors.title}>
+            <Input id="title" value={form.title} onChange={(e) => update("title", e.target.value)} className={`bg-surface ${errors.title ? "border-destructive" : "border-border"}`} />
           </Field>
-          <Field label="Author" error={errors.author}>
-            <Input value={form.author} onChange={(e) => update("author", e.target.value)} className={`bg-surface ${errors.author ? "border-destructive" : "border-border"}`} />
+          <Field label="Author" id="author" error={errors.author}>
+            <Input id="author" value={form.author} onChange={(e) => update("author", e.target.value)} className={`bg-surface ${errors.author ? "border-destructive" : "border-border"}`} />
           </Field>
         </div>
 
-        <Field label="Description" error={errors.description}>
+        <Field label="Description" id="description" error={errors.description}>
           <Textarea
+            id="description"
             value={form.description}
             onChange={(e) => update("description", e.target.value)}
             placeholder="No spoilers, sell the idea…"
@@ -183,9 +184,10 @@ export default function AddFicPage() {
           />
         </Field>
 
-        <Field label="Fandoms" hint="Up to 5. Press Enter to add." error={errors.fandoms}>
+        <Field label="Fandoms" id="fandoms" hint="Up to 5. Press Enter to add." error={errors.fandoms}>
           <div className="flex gap-2 relative">
             <Input
+              id="fandoms"
               value={fandomInput}
               onChange={(e) => { clearError("fandoms"); setFandomInput(e.target.value); setFandomSuggestOpen(true); }}
               onFocus={() => setFandomSuggestOpen(true)}
@@ -235,9 +237,10 @@ export default function AddFicPage() {
           )}
         </Field>
 
-        <Field label="Tags" hint="Up to 15. Press Enter to add." error={errors.tags}>
+        <Field label="Tags" id="tags" hint="Up to 15. Press Enter to add." error={errors.tags}>
           <div className="flex gap-2">
             <Input
+              id="tags"
               value={tagInput}
               onChange={(e) => { clearError("tags"); setTagInput(e.target.value); }}
               onKeyDown={(e) => {
@@ -288,9 +291,9 @@ export default function AddFicPage() {
         </Field>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Field label="Language" error={errors.language}>
+          <Field label="Language" id="language" error={errors.language}>
             <Select value={form.language} onValueChange={(v) => update("language", v)}>
-              <SelectTrigger className={`bg-surface ${errors.language ? "border-destructive" : "border-border"}`}><SelectValue placeholder="Select language" /></SelectTrigger>
+              <SelectTrigger id="language" className={`bg-surface ${errors.language ? "border-destructive" : "border-border"}`}><SelectValue placeholder="Select language" /></SelectTrigger>
               <SelectContent>
                 {["Spanish", "English", "Portuguese", "French", "Italian", "Japanese", "Korean"].map((l) => (
                   <SelectItem key={l} value={l}>{l}</SelectItem>
@@ -298,9 +301,9 @@ export default function AddFicPage() {
               </SelectContent>
             </Select>
           </Field>
-          <Field label="Status" error={errors.status}>
+          <Field label="Status" id="status" error={errors.status}>
             <Select value={form.status} onValueChange={(v) => update("status", v)}>
-              <SelectTrigger className={`bg-surface ${errors.status ? "border-destructive" : "border-border"}`}><SelectValue placeholder="Select status" /></SelectTrigger>
+              <SelectTrigger id="status" className={`bg-surface ${errors.status ? "border-destructive" : "border-border"}`}><SelectValue placeholder="Select status" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="complete">Complete</SelectItem>
                 <SelectItem value="in progress">In progress</SelectItem>
@@ -353,10 +356,10 @@ export default function AddFicPage() {
   );
 }
 
-function Field({ label, hint, error, children }: { label: string; hint?: string; error?: string; children: React.ReactNode }) {
+function Field({ label, hint, error, id, children }: { label: string; hint?: string; error?: string; id?: string; children: React.ReactNode }) {
   return (
     <div>
-      <Label className="text-sm font-medium">{label}</Label>
+      <Label htmlFor={id} className="text-sm font-medium">{label}</Label>
       {hint && <p className="text-xs text-muted-foreground mt-0.5 mb-2">{hint}</p>}
       {!hint && <div className="mt-2" />}
       {children}

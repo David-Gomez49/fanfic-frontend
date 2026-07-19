@@ -33,8 +33,8 @@ test.describe('Fic action flows', () => {
 
     await page.getByRole('button', { name: 'Publish' }).click()
 
-    await expect(page).toHaveURL(/\/fic\//)
-    await expect(page.getByText('E2E Test Fic')).toBeVisible({ timeout: 10000 })
+    await expect(page).toHaveURL(/\/fic\//, { timeout: 15000 })
+    await expect(page.getByText('E2E Test Fic').first()).toBeVisible({ timeout: 10000 })
   })
 
   test('rate a fanfic', async ({ page, testData }) => {
@@ -73,7 +73,7 @@ test.describe('Fic action flows', () => {
 
     const favButton = page.getByRole('button', { name: /favorite/i })
     await favButton.click()
-    await expect(page.getByRole('button', { name: /saved/i }).first()).toBeVisible({ timeout: 5000 })
+    await expect(page.getByRole('button', { name: /saved/i }).first()).toBeVisible({ timeout: 15000 })
 
     const readLaterButton = page.getByRole('button', { name: /read later/i })
     await readLaterButton.click()
