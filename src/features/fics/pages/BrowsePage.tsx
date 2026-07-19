@@ -19,7 +19,7 @@ import { Breadcrumbs } from "@/shared/components/common/breadcrumbs";
 import { EmptyState } from "@/shared/components/common/empty-state";
 import { useDebounce } from "@/shared/hooks/use-debounce";
 
-type Sort = "popular" | "rating" | "recent";
+type Sort = "popular" | "rating" | "recent" | "best";
 type Maturity = "all" | "general" | "mature";
 type ViewMode = "grid" | "list";
 
@@ -500,6 +500,7 @@ export default function BrowsePage() {
             <SelectContent>
               <SelectItem value="popular">Popularity</SelectItem>
               <SelectItem value="rating">Rating</SelectItem>
+              <SelectItem value="best">Best</SelectItem>
               <SelectItem value="recent">Recent</SelectItem>
             </SelectContent>
           </Select>

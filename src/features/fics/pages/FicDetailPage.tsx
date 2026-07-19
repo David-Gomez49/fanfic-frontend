@@ -148,7 +148,7 @@ export default function FicDetailPage() {
             <div className="flex flex-wrap items-center gap-3 mt-6">
               <Button
                 variant={fav ? "default" : "outline"}
-                onClick={() => toggleFav.mutate(ficData.id)}
+                onClick={() => user && toggleFav.mutate({ ficId: ficData.id, userId: user.id })}
                 className={fav ? "bg-gradient-primary" : "border-border"}
                 size="sm"
               >
@@ -158,7 +158,7 @@ export default function FicDetailPage() {
 
               <Button
                 variant={inReadingList ? "default" : "outline"}
-                onClick={() => toggleReadLater.mutate(ficData.id)}
+                onClick={() => user && toggleReadLater.mutate({ ficId: ficData.id, userId: user.id })}
                 className={inReadingList ? "bg-gradient-primary" : "border-border"}
                 size="sm"
               >

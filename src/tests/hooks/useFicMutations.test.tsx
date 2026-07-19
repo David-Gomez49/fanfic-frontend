@@ -61,7 +61,7 @@ describe('useToggleFavorite', () => {
     vi.mocked(api.post).mockResolvedValue({ favorited: true })
     const { result, spy } = renderMutHook(() => useToggleFavorite())
 
-    result.current.mutate('fic-1')
+    result.current.mutate({ ficId: 'fic-1', userId: 'user-1' })
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true))
     expect(spy).toHaveBeenCalledWith({ queryKey: ['fic', 'fic-1'] })
@@ -74,7 +74,7 @@ describe('useToggleReadLater', () => {
     vi.mocked(api.post).mockResolvedValue({ saved: true })
     const { result, spy } = renderMutHook(() => useToggleReadLater())
 
-    result.current.mutate('fic-1')
+    result.current.mutate({ ficId: 'fic-1', userId: 'user-1' })
 
     await waitFor(() => expect(result.current.isSuccess).toBe(true))
     expect(spy).toHaveBeenCalledWith({ queryKey: ['fic', 'fic-1'] })

@@ -110,7 +110,7 @@ export function FicCardList({ fic, highlight, style }: { fic: Fanfic; highlight?
           <button
             onClick={(e) => {
               e.preventDefault();
-              toggleFav.mutate(fic.id);
+              if (user) toggleFav.mutate({ ficId: fic.id, userId: user.id });
             }}
             className="grid h-8 w-8 place-items-center rounded-full border border-border/60 hover:border-rose-400/60 hover:bg-rose-400/10 transition"
             aria-label="Toggle favorite"
@@ -123,7 +123,7 @@ export function FicCardList({ fic, highlight, style }: { fic: Fanfic; highlight?
           <button
             onClick={(e) => {
               e.preventDefault();
-              toggleReadLater.mutate(fic.id);
+              if (user) toggleReadLater.mutate({ ficId: fic.id, userId: user.id });
             }}
             className="grid h-8 w-8 place-items-center rounded-full border border-border/60 hover:border-primary/60 hover:bg-primary/10 transition"
             aria-label="Toggle reading list"
