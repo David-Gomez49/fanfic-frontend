@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, Fragment } from "react";
 import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { Heart, Star, ExternalLink, ArrowLeft, MessageCircle, Send, Bookmark, RefreshCw, Calendar, User, ChevronDown, Loader2, Link as LinkIcon, Check, Flag } from "lucide-react";
@@ -138,10 +138,16 @@ export default function FicDetailPage() {
             </div>
 
             <div className="flex items-center gap-2 mt-4">
-              <span className="text-xs uppercase tracking-widest text-primary-glow">
-                {ficData.fandoms.join(" · ")}
+              <span className="text-xs uppercase tracking-widest text-primary-glow flex flex-wrap gap-x-1">
+                {ficData.fandoms.map((f, i) => (
+                  <Fragment key={f}>
+                    {i > 0 && <span className="text-muted-foreground">·</span>}
+                    <Link href={`/browse?fandom=${encodeURIComponent(f.toLowerCase())}`} className="hover:underline">
+                      {f}
+                    </Link>
+                  </Fragment>
+                ))}
               </span>
-              <span className="text-muted-foreground text-xs">·</span>
               <span className="text-xs text-muted-foreground">{ficData.language}</span>
             </div>
 

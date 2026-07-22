@@ -16,6 +16,7 @@ import {
 } from "@/shared/components/ui/select";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/shared/components/ui/collapsible";
 import { Breadcrumbs } from "@/shared/components/common/breadcrumbs";
+import { useSearchParams } from "next/navigation";
 import { EmptyState } from "@/shared/components/common/empty-state";
 import { useDebounce } from "@/shared/hooks/use-debounce";
 
@@ -72,6 +73,18 @@ export default function BrowsePage() {
   const tagSuggestionsRef = useRef<HTMLDivElement>(null);
   const fandomSuggestionsRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const tags = searchParams.get('tags')
+    if (tags) setIncludeTags(tags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean))
+    const exclTags = searchParams.get('excludeTags')
+    if (exclTags) setExcludeTags(exclTags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean))
+    const fandom = searchParams.get('fandom')
+    if (fandom) setFandoms(fandom.split(',').map(f => f.trim().toLowerCase()).filter(Boolean))
+    const exclFandom = searchParams.get('excludeFandoms')
+    if (exclFandom) setExcludeFandoms(exclFandom.split(',').map(f => f.trim().toLowerCase()).filter(Boolean))
+  }, [])
 
   const debouncedQ = useDebounce(q, 300);
   const debouncedTags = useDebounce(includeTags, 300);
